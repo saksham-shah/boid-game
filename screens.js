@@ -20,7 +20,7 @@ function MenuScreen() {
 		screen = gameScr;
 	}, {}));
 
-	// Easter egg in this placeholder button
+	// Button used to test clicking works - not needed now as the testing is done, but it's still there
 	this.buttons.push(new Button(75, 250, 200, 50, "Click Tester", 
 	function(button) { // Hover text function
 		// if (button.clicked) {
