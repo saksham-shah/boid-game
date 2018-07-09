@@ -1,7 +1,8 @@
 // Text to be drawn on screen
-function Text(x_, y_, text_, tSize_, info_) {
-	this.x = x_;
-	this.y = y_;
+function Text(x_, y_, text_, tSize_, info_, moveF_) {
+	this.startPos = createVector(x_, y_);
+	this.pos = this.startPos.copy();
+
 	this.moving = false;
 
 	this.tSize = tSize_;
@@ -12,7 +13,16 @@ function Text(x_, y_, text_, tSize_, info_) {
 		this.textToDraw = text_;
 		this.textFunction = null;
 	}
+
+	this.movingFunction = moveF_;
+
 	this.info = info_;
+}
+
+// Make the text do its movement
+Text.prototype.move = function () {
+	this.moving = true;
+	this.pos = this.startPos.copy();
 }
 
 // Updates the text
@@ -21,10 +31,11 @@ Text.prototype.update = function() {
 		this.textToDraw = this.textFunction(this);
 	}
 
-	if (this.moving) {
+	// Text can move with the moving function (which is defined when the text object is created)
+	if (this.moving && this.movingFunction !== undefined) {
 		var pos = this.movingFunction(this);
-		this.x = pos[0];
-		this.y = pos[1];
+		this.pos.x = pos[0];
+		this.pos.y = pos[1];
 	}
 }
 
@@ -35,6 +46,6 @@ Text.prototype.draw = function() {
 		noStroke();
 		textAlign(CENTER);
 		textSize(this.tSize);
-		text(this.textToDraw, this.x, this.y);
+		text(this.textToDraw, this.pos.x, this.pos.y);
 	}
 }
