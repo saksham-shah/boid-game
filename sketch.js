@@ -1,6 +1,7 @@
 var screen, prevScreen;
 var menuScr, gameScr, scoreScr, settingsScr;
 var myCursor;
+var backgroundMusic;
 
 function preload() {
 	backgroundMusic = loadSound("background_music.mp3");
@@ -8,7 +9,6 @@ function preload() {
 
 function setup() {
 	createCanvas(600, 400);
-	//background(0);
 	
 	// Musiiiiiic
 	backgroundMusic.setVolume(0);
@@ -39,40 +39,7 @@ function draw() {
 	} else {
 		prevScreen = screen;
 	}
-	// switch (screen) {
-	// 	case "menu":
-	// 		menuScr.update();
-	// 		menuScr.draw();
-	// 		break;
-	// 	case "game":
-	// 		gameScr.update();
-	// 		gameScr.draw();
-	// 		break;
-	// 	case "settings":
-	// 		settingsScr.update();
-	// 		settingsScr.draw();
-	// 		break;
-	// 	// case "otherSettings":
-	// 	// 	otherSettingsScr.update();
-	// 	// 	otherSettingsScr.draw();
-	// 	// 	break;
-	// 	case "score":
-	// 		scoreScr.update();
-	// 		scoreScr.draw();
-	// 		break;
-	// 	default:
-	// 		background(0);
-	// }
 
 	myCursor.update();
 	myCursor.draw();
 }
-
-// function mousePressed() {
-// 	if (screen == "menu") {
-// 		screen = "game";
-// 		game.start();
-// 	} else {
-// 		screen = "menu";
-// 	}
-// }
