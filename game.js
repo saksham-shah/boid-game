@@ -17,7 +17,8 @@ var gameSettings = {
 	lives: [10, 1, 20, 1, 10, "Lives"],
 	zones: [5, 1, 10, 1, 5, "Zones"],
 	store: [150, 50, 500, 10, 150, "Zone points"],
-	zoneRadius: [75, 20, 300, 5, 75, "Zone size"]
+	zoneRadius: [75, 20, 300, 5, 75, "Zone size"],
+	music: [50, 0, 100, 10, 50, "Music volume"]
 }
 
 // Initiate function, with the game settings as parameters
