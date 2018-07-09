@@ -79,7 +79,7 @@ function GameScreen() {
 	// Initially the game is unpaused
 	this.paused = false;
 	this.pausePressed = false;
-	
+
 	// Pause text which slides in from the bottom
 	this.pauseText = new Text(width/2, height + 200, "P to unpause", 75, {},
 	function(text) {
@@ -105,7 +105,7 @@ GameScreen.prototype.update = function() {
 			screen = scoreScr;
 		}
 	}
-	
+
 	// When the P key is released, pause is toggled - could be generalised to a key object, making it reusable with other keys, e.g. Q for quit
 	if (keyIsDown("P".charCodeAt(0))) {
 		if (!this.pausePressed) {
@@ -226,7 +226,7 @@ function SettingsScreen(pages_) {
 	}, this));
 }
 
-// Loads the settings
+// Loads the settings from the global settings object
 SettingsScreen.prototype.load = function() {
 	for (var i = 0; i < this.settings.length; i++) {
 		for (var j = 0; j < this.settings[i].length; j++) {
@@ -244,12 +244,14 @@ SettingsScreen.prototype.save = function() {
 			gameSettings[current.settingName][0] = current.currentValue;
 		}
 	}
+	
+	// Updates music volume
+	backgroundMusic.setVolume(gameSettings.music[0] * 0.01);
 }
 
 // Updates the screen
 SettingsScreen.prototype.update = function() {
 	// Updates the settings
-
 	for (var i = 0; i < this.settings[this.currentPage].length; i++) {
 		this.settings[this.currentPage][i].update();
 	}
