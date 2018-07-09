@@ -11,7 +11,7 @@ function setup() {
 	createCanvas(600, 400);
 	
 	// Musiiiiiic
-	backgroundMusic.setVolume(0);
+	backgroundMusic.setVolume(gameSettings.music[0] * 0.01);
 	backgroundMusic.loop();
 
 	menuScr = new MenuScreen();
@@ -19,8 +19,9 @@ function setup() {
 	settingsScr = new SettingsScreen([
 		["Main", "players", "walls"],
 		["Race", "nodes", "nodeRadius"],
-		["Mouse Run", "lives", "zones", "store", "zoneRadius"]
-		]);
+		["Mouse Run", "lives", "zones", "store", "zoneRadius"],
+		["Other", "music"]
+	]);
 	scoreScr = new ScoreScreen();
 
 	// Starts in main menu
