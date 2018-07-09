@@ -21,7 +21,7 @@ function MenuScreen() {
 	}, {}));
 
 	// Button used to test clicking works - not needed now as the testing is done, but it's still there
-	this.buttons.push(new Button(75, 250, 200, 50, "Click Tester", 
+	this.buttons.push(new Button(75, 250, 200, 50, "Click Tester",
 	function(button) { // Hover text function
 		return "Clicks: " + button.info.clickCount;
 	}, 4, 30, 20,
@@ -79,6 +79,15 @@ function GameScreen() {
 	// Initially the game is unpaused
 	this.paused = false;
 	this.pausePressed = false;
+	
+	// Pause text which slides in from the bottom
+	this.pauseText = new Text(width/2, height + 200, "P to unpause", 75, {},
+	function(text) {
+		if (text.pos.y <= height/2 + 30) {
+			text.moving = false;
+		}
+		return [text.pos.x, text.pos.y - 30];
+	});
 
 	// Small back button in the bottom right corner
 	this.backButton = new Button(475, 350, 100, 25, "Back", "Menu", 4, 15, 15,
@@ -89,7 +98,6 @@ function GameScreen() {
 
 // Updates the screen
 GameScreen.prototype.update = function() {
-	// When the P key is released, pause is toggled - could be generalised to a key object, making it reusable with other keys, e.g. Q for quit
 	if (this.game != null && !this.paused) {
 		this.game.update();
 		if (!this.game.ongoing) {
@@ -97,7 +105,8 @@ GameScreen.prototype.update = function() {
 			screen = scoreScr;
 		}
 	}
-
+	
+	// When the P key is released, pause is toggled - could be generalised to a key object, making it reusable with other keys, e.g. Q for quit
 	if (keyIsDown("P".charCodeAt(0))) {
 		if (!this.pausePressed) {
 			this.pausePressed = true;
@@ -105,7 +114,12 @@ GameScreen.prototype.update = function() {
 	} else if (this.pausePressed) {
 		this.pausePressed = false;
 		this.paused = !this.paused;
+		if (this.paused) {
+			this.pauseText.move();
+		}
 	}
+
+	this.pauseText.update();
 
 	this.backButton.update();
 }
@@ -125,11 +139,7 @@ GameScreen.prototype.draw = function() {
 		noStroke();
 		rect(0, 0, width, height);
 
-		fill(255);
-		noStroke();
-		textAlign(CENTER);
-		textSize(75);
-		text("P to unpause", width/2, 200)
+		this.pauseText.draw();
 	}
 
 	// Draws the back button
@@ -140,7 +150,7 @@ function SettingsScreen(pages_) {
 	// Setting up settings
 	this.pages = pages_;
 	this.settings = [];
-	
+
 	// Determines locations of the setting objects
 	for (var i = 0; i < this.pages.length; i++) {
 		var page = []
@@ -179,11 +189,11 @@ function SettingsScreen(pages_) {
 	// Saves the settings (button in the bottom middle)
 	this.buttons.push(new Button(width/2 - 50, 350, 100, 25, "Save", "Save settings", 4, 15, 15,
 	function(button) {
-		button.info.save();	
+		button.info.save();
 	}, this));
 
 	// Next/previous page buttons
-	this.buttons.push(new Button(25, 25, 100, 25, "Previous", 
+	this.buttons.push(new Button(25, 25, 100, 25, "Previous",
 	function(button) { // Hover text function
 		var val = button.info.currentPage - 1;
 		if (val < 0) {
@@ -199,7 +209,7 @@ function SettingsScreen(pages_) {
 		button.info.currentPage = val;
 	}, this));
 
-	this.buttons.push(new Button(475, 25, 100, 25, "Next", 
+	this.buttons.push(new Button(475, 25, 100, 25, "Next",
 	function(button) { // Hover text function
 		var val = button.info.currentPage + 1;
 		if (val > button.info.pages.length - 1) {
