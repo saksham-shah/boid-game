@@ -2,14 +2,17 @@ var screen, prevScreen;
 var menuScr, gameScr, scoreScr, settingsScr;
 var myCursor;
 
-// function preload() {
-// 	soundFormats('mp3', 'ogg');
-// 	backgroundMusic = loadSound("background_music.mp3");
-// }
+function preload() {
+	backgroundMusic = loadSound("background_music.mp3");
+}
 
 function setup() {
 	createCanvas(600, 400);
 	//background(0);
+	
+	// Musiiiiiic
+	backgroundMusic.setVolume(0);
+	backgroundMusic.loop();
 
 	menuScr = new MenuScreen();
 	gameScr = new GameScreen();
