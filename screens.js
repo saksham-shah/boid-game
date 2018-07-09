@@ -8,6 +8,9 @@ function drawBackground() {
 	rect(edge * 0.5, edge * 0.5, width - edge, height - edge);
 }
 
+var smallButtonWidth = 100;
+var smallButtonHeight = 25;
+
 function MenuScreen() {
 	//Adding a bunch of buttons
 	this.buttons = [];
@@ -90,7 +93,7 @@ function GameScreen() {
 	});
 
 	// Small back button in the bottom right corner
-	this.backButton = new Button(475, 350, 100, 25, "Back", "Menu", 4, 15, 15,
+	this.backButton = new Button(width - smallButtonWidth - 25, height - smallButtonHeight - 25, smallButtonWidth, smallButtonHeight, "Back", "Menu", 4, 15, 15,
 	function(button) {
 		screen = menuScr;
 	}, {});
@@ -173,13 +176,13 @@ function SettingsScreen(pages_) {
 	this.buttons = [];
 
 	// Small back button in the bottom right corner
-	this.buttons.push(new Button(475, 350, 100, 25, "Back", "Menu", 4, 15, 15,
+	this.buttons.push(new Button(width - smallButtonWidth - 25, height - smallButtonHeight - 25, smallButtonWidth, smallButtonHeight, "Back", "Menu", 4, 15, 15,
 	function(button) {
 		screen = menuScr;
 	}, {}));
 
 	// Resets the settings to default (button in the bottom left corner)
-	this.buttons.push(new Button(25, 350, 100, 25, "Reset", "To default", 4, 15, 15,
+	this.buttons.push(new Button(25, height - smallButtonHeight - 25, smallButtonWidth, smallButtonHeight, "Reset", "To default", 4, 15, 15,
 	function(button) {
 		for (var i = 0; i < button.info.settings[button.info.currentPage].length; i++) {
 			button.info.settings[button.info.currentPage][i].reset();
@@ -187,13 +190,13 @@ function SettingsScreen(pages_) {
 	}, this));
 
 	// Saves the settings (button in the bottom middle)
-	this.buttons.push(new Button(width/2 - 50, 350, 100, 25, "Save", "Save settings", 4, 15, 15,
+	this.buttons.push(new Button(width/2 - smallButtonWidth * 0.5, height - smallButtonHeight - 25, smallButtonWidth, smallButtonHeight, "Save", "Save settings", 4, 15, 15,
 	function(button) {
 		button.info.save();
 	}, this));
 
 	// Next/previous page buttons
-	this.buttons.push(new Button(25, 25, 100, 25, "Previous",
+	this.buttons.push(new Button(25, 25, smallButtonWidth, smallButtonHeight, "Previous",
 	function(button) { // Hover text function
 		var val = button.info.currentPage - 1;
 		if (val < 0) {
@@ -209,7 +212,7 @@ function SettingsScreen(pages_) {
 		button.info.currentPage = val;
 	}, this));
 
-	this.buttons.push(new Button(475, 25, 100, 25, "Next",
+	this.buttons.push(new Button(width - smallButtonWidth - 25, 25, smallButtonWidth, smallButtonHeight, "Next",
 	function(button) { // Hover text function
 		var val = button.info.currentPage + 1;
 		if (val > button.info.pages.length - 1) {
@@ -234,6 +237,9 @@ SettingsScreen.prototype.load = function() {
 			current.currentValue = gameSettings[current.settingName][0];
 		}
 	}
+
+	// When the settings screen is opened it should be on the first page
+	this.currentPage = 0;
 }
 
 // Saves the settings to the global settings object
@@ -244,7 +250,7 @@ SettingsScreen.prototype.save = function() {
 			gameSettings[current.settingName][0] = current.currentValue;
 		}
 	}
-	
+
 	// Updates music volume
 	backgroundMusic.setVolume(gameSettings.music[0] * 0.01);
 }
@@ -290,7 +296,7 @@ function ScoreScreen() {
 	this.result = ""
 
 	// Small back button in the bottom right corner
-	this.backButton = new Button(475, 350, 100, 25, "Back", "Menu", 4, 15, 15,
+	this.backButton = new Button(width - smallButtonWidth - 25, height - smallButtonHeight - 25, smallButtonWidth, smallButtonHeight, "Back", "Menu", 4, 15, 15,
 	function(button) {
 		screen = menuScr;
 	}, {});
