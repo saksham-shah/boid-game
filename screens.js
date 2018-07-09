@@ -23,13 +23,9 @@ function MenuScreen() {
 	// Button used to test clicking works - not needed now as the testing is done, but it's still there
 	this.buttons.push(new Button(75, 250, 200, 50, "Click Tester", 
 	function(button) { // Hover text function
-		// if (button.clicked) {
-		// 	return button.info.clickCount * 2;
-		// }
 		return "Clicks: " + button.info.clickCount;
 	}, 4, 30, 20,
 	function(button) { // Click function
-		//tis an easter egg
 		button.info.clickCount += 1;
 	}, {clickCount: 0}));
 
@@ -44,7 +40,6 @@ function MenuScreen() {
 	// Settings button
 	this.buttons.push(new Button(325, 250, 200, 50, "Settings", "Settings", 4, 30, 20,
 	function(button) {
-		//settingsScr.load("players", "walls", "nodes", "lives");
 		settingsScr.load();
 		screen = settingsScr;
 	}, {}));
