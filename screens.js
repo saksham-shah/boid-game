@@ -33,7 +33,7 @@ function MenuScreen() {
 		button.info.clickCount += 1;
 	}, {clickCount: 0}));
 
-	// Mouse Run  start button
+	// Mouse Run start button
 	this.buttons.push(new Button(325, 150, 200, 50, "Mouse Run", "Don't get hit!", 4, 30, 20,
 	function(button) {
 		gameScr.game = new Game("mouseRun", 1000, 1000);
@@ -41,7 +41,7 @@ function MenuScreen() {
 		screen = gameScr;
 	}, {}));
 
-	// Placeholder button
+	// Settings button
 	this.buttons.push(new Button(325, 250, 200, 50, "Settings", "Settings", 4, 30, 20,
 	function(button) {
 		//settingsScr.load("players", "walls", "nodes", "lives");
@@ -145,7 +145,8 @@ function SettingsScreen(pages_) {
 	// Setting up settings
 	this.pages = pages_;
 	this.settings = [];
-
+	
+	// Determines locations of the setting objects
 	for (var i = 0; i < this.pages.length; i++) {
 		var page = []
 		for (var j = 1; j < this.pages[i].length; j++) {
@@ -228,15 +229,6 @@ SettingsScreen.prototype.load = function() {
 			current.currentValue = gameSettings[current.settingName][0];
 		}
 	}
-	// for (var i = 0; i < this.setting.length; i++) {
-	// 	var current = arguments[i];
-	// 	var x = 175;
-	// 	if (i % 2 != 0) {
-	// 		x = width - x;
-	// 	}
-	// 	var y = 175 + 110 * Math.floor(i/2);
-	// 	this.settings.push(new Setting(x, y, current, gameSettings[current][0], gameSettings[current][1], gameSettings[current][2], gameSettings[current][3]));
-	// }
 }
 
 // Saves the settings to the global settings object
