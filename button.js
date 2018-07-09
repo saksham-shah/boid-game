@@ -16,15 +16,6 @@ function Button(x_, y_, w_, h_, text_, hoverText_, sWeight_, tSize_, htSize_, cl
 		this.hoverTextToDraw = hoverText_;
 		this.hoverTextFunction = null;
 	}
-	// this.textToDraw = text_;
-	// this.hoverTextToDraw = hoverText_;
-	
-	// // Colours
-	// this.fillColour = colourScheme_.fillColour;
-	// this.strokeColour = colourScheme_.strokeColour;
-	// this.clickedFill = colourScheme_.clickedFill;
-	// this.clickedStroke = colourScheme_.clickedStroke;
-	// this.textColour = colourScheme_.textColour;
 
 	this.sWeight = sWeight_;
 	this.tSize = tSize_;
